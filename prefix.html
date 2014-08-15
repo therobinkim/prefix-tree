@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Prefix Demo</title>
+    <script src="./lib/jquery.js"></script>
+    <script src="./lib/underscore.js"></script>
+    <script src="./prefix.js"></script>
+    <script src="./arrayOfWords.js"></script>
+  </head>
+  <body>
+    <script>
+      $(document).ready(function() {
+        var prefix = new Prefix();
+        for(var i = 0; i < words.length; i++) {
+          prefix.addWord(words[i]);
+        }
+
+        $('body').on('keyup', 'input', function() {
+          $('div').remove();
+
+          var suggestions = prefix.autocomplete($('input').val());
+          for(var i = 0; i < suggestions.length; i++) {
+            var $suggestion = $('<div></div>');
+            $suggestion.text(suggestions[i]);
+            $('body').append($suggestion);
+          }
+        });
+      });
+    </script>
+    <p>Type something here: <input type="text"><br />Suggestions:</p>
+  </body>
+</html>
